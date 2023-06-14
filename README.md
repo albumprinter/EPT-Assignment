@@ -5,7 +5,7 @@ We expect candidates to show us their skills in building robust, testable and ma
 ## Task
 Your task is to build an image gallery system for **photo products**. A Photo product is any product sold by Albelli-Photobox. The application should display all the products provided and render the products with their extra properties. 
 
-## Data structure
+### Data structure
 A **photo product** is represented by an object with an image URL, order count, category and some extra properties. Extra properties are `texture`, `border`, `rotate`. 
 ```json
 {
@@ -74,8 +74,8 @@ Create a web application that allows users to browse a range of photo products. 
 ### **Instructions**
 
 1. Implement the frontend and backend components of the assignment.
-3. Provide documentation in the repository with instructions on how to run and test the application.
-4. Share your repository URL or the zipped artifacts with us when you are done.
+2. Provide documentation in the repository with instructions on how to run and test the application.
+3. Share your repository URL with us when you are done.
 
 ### **What We Value**
 
@@ -83,6 +83,6 @@ Your assignment will be evaluated based on the following values:
 
 - Your backend design and implementation is more valuable to us than the frontend part
 - **Functionality**: Does the application meet the requirements outlined above? Does the frontend display images and their properties correctly? Does the backend provide the expected filtering and sorting capabilities?
-- **Code Quality**: Is the code well-structured, maintainable, and adheres to best practices? Are appropriate frameworks and libraries utilized effectively?
+- **Code Quality**: Is the code well-structured, maintainable, and following best practices? Are appropriate frameworks and libraries utilized effectively?
 - **Backend Architecture**: Is the architecture diagram clear and well-designed? Does it demonstrate an understanding of serverless technologies and AWS services?
 - **Documentation**: Are clear instructions provided for running and testing the application?
