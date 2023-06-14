@@ -24,7 +24,7 @@ A **photo product** is represented by an object with an image URL, order count, 
 
 `border` is a number which represents the width of a border around the image
 
-`rotate` is a number which represents the degrees the source image of a product has been rotated. Photo products rotate from the center.
+`rotate` is a number which represents the degrees the product has been rotated. Photo products rotate from the center.
 
 
 ### **Backend Component**
