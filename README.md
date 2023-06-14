@@ -9,15 +9,15 @@ Your task is to build an image gallery system for **photo products**. A Photo pr
 A **photo product** is represented by an object with an image URL, order count, category and some extra properties. Extra properties are `texture`, `border`, `rotate`. 
 ```json
 {
-  id: "image_4",
-  orderCount: 7411,
-  category: "walldecor",
-  extra: {
-    texture: "glossy",
-    border: 5,
-    rotate: 90,
-  },
-},
+  "id": "image_4",
+  "orderCount": 7411,
+  "category": "walldecor",
+  "extra": {
+    "texture": "glossy",
+    "border": 5,
+    "rotate": 90
+  }
+}
 ```
 
 `texture` is a string of the type of material the product is printed on
