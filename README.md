@@ -2,6 +2,9 @@
 
 We expect candidates to show us their skills in building robust, testable and maintainable software keeping in mind modern design and architecture principles and industry standard best practices. We value simplicity, readability and pragmatism over unnecessarily performant or complex solutions.
 
+## Task
+Your task to build an image gallery system from **photo products**. A **photo product** contains an image URL with some extra properties. Extra information are `texture, whiteBorder, rotate`. Images are provided under the `/image` folder. Extra information is provided from the following URL. `https://k06fotu2c3.execute-api.eu-west-1.amazonaws.com/`. In the response, each id represents an image from this folder.
+
 ### **Frontend Component**
 
 Create a web application that allows users to browse a range of photo products. The application should have the following features:
@@ -22,12 +25,15 @@ Create a web application that allows users to browse a range of photo products. 
    - Category (string)
    - Number of orders (integer)
    - Rotation (integer, degree)
-5. The frontend application should display a gallery of images without rendering their extra properties initially. Each image should be represented by a thumbnail.
-6. Upon a click on an image from the gallery, the application should open an overlay which renders the selected product with all it's properties. This rendering operation should be done on a `HTMLCanvasElement`.
+5. This web application should display a gallery of images without rendering their extra properties initially. Displaying these images as a grid of small squares is fine. Feel free to implement your own design.
+6. On click of an image from the gallery, the application should open an overlay which renders the selected photo product with all of it's properties. These provided extra properties needs to apply to the images with following rule:
+   - Texture: Textures needs to apply onto the image, making the image looks like after it's being produced to it's material.
+   - White border: White borders are just white borders around the images. You should keep the original image size after applying this.
+   - Rotate: Rotates the image with given number in **degrees** from the center.
 
 ### **Backend Component**
 
-Design and implement a serverless backend API using AWS technologies and NodeJS. Product extras are served from the following URL(https://k06fotu2c3.execute-api.eu-west-1.amazonaws.com/).
+Design and implement a serverless backend API using AWS technologies and NodeJS. Photo product extras are served from the following URL(https://k06fotu2c3.execute-api.eu-west-1.amazonaws.com/).
 
 The backend should have the following features:
 
