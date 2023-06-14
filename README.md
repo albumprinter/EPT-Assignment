@@ -1,97 +1,88 @@
-_The example below is meant to be a reference more than a prescriptive template.
-The end goal is that README files always present the information here presented in some capacity._
+## **Assignment: Photo Products Gallery**
 
----
-[<img src="https://img.shields.io/badge/-Jenkins-success?logo=jenkins&logoColor=D24939" />][BuildLink]
-[<img src="https://img.shields.io/badge/-Octopus-2F93E0?logo=octopus-deploy&logoColor=white" />][OctopusLink]
-[<img src="https://img.shields.io/badge/-Kibana-005571?logo=kibana&logoColor=white" />][LogsLink]
-[<img src="https://img.shields.io/static/v1?label=Documentation&message=Github&style=flat&logo=kibana&color=9cf" />][DocsLink]
+We expect candidates to show us their skills in building robust, testable and maintainable software keeping in mind modern design and architecture principles and industry standard best practices. We value simplicity, readability and pragmatism over unnecessarily performant or complex solutions.
 
-| T-DTAP | A-DTAP | P-DTAP|
-| --- | --- | --- |
-[![][SwaggerImg]][ApiT]| [![][SwaggerImg]][ApiA]| [![][SwaggerImg]][ApiP]
+## Task
+Your task is to build an image gallery system for **photo products**. A Photo product is any product sold by Albelli-Photobox. The application should display all the products provided and render the products with their extra properties. 
 
-[OctopusLink]: https://octopus.deploy.photoconnector.net/app#/Spaces-1/projects/{project-name}
-[BuildLink]: https://jenkins.albelli.com/view/{area}/job/{project-name}
-[LogsLink]: https://es.logging.albelli.com/_plugin/kibana/goto/be96ee4d7aeabe4810b99a3f829ad0a6?security_tenant=albelli
-[DocsLink]: https://github.com/albumprinter/{area}-documentation
+### Data structure
+A **photo product** is represented by an object with an image URL, order count, category and some extra properties. Extra properties are `texture`, `border`, `rotate`. 
+```json
+{
+  "id": "image_4",
+  "orderCount": 7411,
+  "category": "walldecor",
+  "extra": {
+    "texture": "glossy",
+    "border": 5,
+    "rotate": 90
+  }
+}
+```
 
-[ApiT]: https://{project-name}.sandbox.ecom1.albelli.com/
-[ApiA]: https://{project-name}.nonprod.ecom1.albelli.com/
-[ApiP]: https://{project-name}.ecom1.albelli.com/
-[SwaggerImg]: https://github.com/albumprinter/PL-Blobs/blob/master/Tools/Swagger.png
+`texture` is a string of the type of material the product is printed on
 
-# <Name of the system/component/application/API>
+`border` is a number which represents the width of a border around the image
 
-Name should follow company naming standard of _Domain-WhatDoesItDo_
+`rotate` is a number which represents the degrees the product has been rotated. Photo products rotate from the center.
 
-## Resources
 
-Include references to all resources related to and relevant for this system.
+### **Backend Component**
 
-* Endpoints/URLs of all environments where an instance of this system exists
-* Swagger URLs of all environments
-* Deployment control panel URLs
-* AWS accounts
-* Logs URLs
+Design and implement a serverless backend API using AWS technologies and NodeJS. Photo product extras are served from the following URL https://k06fotu2c3.execute-api.eu-west-1.amazonaws.com/.
 
-See for example:
-* https://github.com/albumprinter/ECOM-OrderCloudAPI
+The backend should have the following features:
 
-# Purpose and context
+1. Design an architecture diagram of the API, showing the components involved and how they interact with each other. Use any standard diagramming tool or framework of your choice.
+2. Implement a GET endpoint in the backend API that accepts filter and sort arguments as parameters.
+   - Filters:
+     - Border (boolean)
+     - Texture (e.g., canvas, glossy, not applied)
+   - Sorting:
+     - Category (ascending/descending alphabetically)
+     - Number of orders (ascending/descending)
+3. The endpoint should retrieve data from a chosen data store based on the filter and sort criteria provided in the request
+4. Return the filtered and sorted data as a JSON response.
+5. Leverage AWS serverless technologies for the implementation.
 
-The information should summarise:
-* Why does this system exists
-* What is its domain
-* Links to systems, external and internal, this system is connected to or interacts with
+### **Frontend Component**
 
-## Architecture
+Create a web application that allows users to browse a range of photo products. The application should have the following features:
 
-Include here diagrams describing the system in its components and flows.
+1. The frontend application should be built using any framework of your choice (e.g., React, Angular, Vue.js, Vanilla JS). You're free to design this application as long as it has an intuitive user interface.
+2. The application should make an HTTP request to the backend component to fetch data of photo products.
+3. The application should display a gallery of photo products without rendering their extra properties. `./images/` contains all the images needed. Image ids in the data represents an image from this folder. Displaying these photo product as a grid of small squares is fine. Feel free to implement your own design.
+4. The application should support filtering and sorting of the images through the API. Design an interface that makes it easy for a user to 
+     - Sort by category or number of orders
+     - Filter by border and/or texture
+5. On click of a photo product from the gallery, the application should open an overlay which renders the selected photo product with all of its extra properties. Render the extra properties of a photo product according to these rules:
+   - Texture: A texture makes the rendered photo product look more like it's physical representation. To do this you need to blend a texture image on to the photo product. Texture images can be found in `./images/textures`. For example it should look something like this:
 
-If relevant, a diagram describing how this system is connected to other systems should also be added here.
+      | Original image | Texture | Image after Texture
+      |----------------|---------|--------------------
+      ![](image_without_texture.png)|![](texture.png)|![](image_with_texture.png)
+   - Border: Borders are a white area placed around the photo product. The image's size remains the same, the border is rendered around it increasing the size of the photo product.
+  
+     ![](image_white_border.jpeg)
+   - Rotate: Rotates the image with given number in **degrees** from the center.
 
-For example:
 
-![Order Promise Flow](https://github.com/albumprinter/PL-Blobs/blob/master/OrderPromise/Order%20Promise%20Flow.png)
+      | Original image | Image after rotating 90°
+      |----------------|---------------------
+      ![](./images/image_1.jpg)|![](image_1_rotated.png)
 
-More examples in context:
-* https://github.com/albumprinter/OrderCutoff-Api
-* https://github.com/albumprinter/storefront-product-info-provider
-* https://github.com/albumprinter/storefront-feed-management-tool
+### **Instructions**
 
-## Functionality
+1. Implement the frontend and backend components of the assignment.
+2. Provide documentation in the repository with instructions on how to run and test the application.
+3. Share your repository URL with us when you are done.
 
-High level description of what the system does and how it works.
+### **What We Value**
 
-### Schemas/Contracts/Business rules
+Your assignment will be evaluated based on the following values:
 
-Typical elements to include here:
-
-* What are the existing contracts, what to they look like (include examples or references to examples)
-* With whom such contracts have been agreed upon
-* Why is the data structured in a certain way
-
-## Development information
-
-Here information on how to set up and run a development enviroment.
-
-The information should include:
-* How to get and use keys necessary to configure and run locally
-* How to run unit/integration tests
-
-### Commands and operations
-
-Here the information on how to execute commands, trigger flows, make the system _work_ should also be included.
-
-See for example:
-* https://github.com/albumprinter/storefront-platform
-
-## User manual (when relevant)
-
-Here information on how to use the system from a stakeholder point of view.
-
-For example:
-* Jarvis commands
-* Etc.
-
+- Your backend design and implementation is more valuable to us than the frontend part
+- **Functionality**: Does the application meet the requirements outlined above? Does the frontend display images and their properties correctly? Does the backend provide the expected filtering and sorting capabilities?
+- **Code Quality**: Is the code well-structured, maintainable, and following best practices? Are appropriate frameworks and libraries utilized effectively?
+- **Backend Architecture**: Is the architecture diagram clear and well-designed? Does it demonstrate an understanding of serverless technologies and AWS services?
+- **Documentation**: Are clear instructions provided for running and testing the application?
