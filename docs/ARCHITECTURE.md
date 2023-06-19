@@ -12,3 +12,5 @@ sequenceDiagram
     API-->>UI: JSON response
     UI-->>UI: Render
 ```
+
+![Scenario diagram](images/scenario-diagram.png)
