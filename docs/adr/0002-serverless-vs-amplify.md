@@ -2,6 +2,7 @@
 
 - Author: [Peter Banjo](peter.banjo@photobox.com)
 - Status: approved
+- Date: 2023-06-22
 
 Facing the concern of deploying a frontend and backend application, and provisioning AWS infrastructure, I tried to use [Amplify JavaScript libraries](https://docs.amplify.aws/lib/project-setup/create-application/q/platform/js/) to save time.
 
