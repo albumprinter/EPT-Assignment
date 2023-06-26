@@ -1,0 +1,17 @@
+{
+  "name": "ept-assignment-photo-gallery-db",
+  "author": {
+    "name": "Peter Banjo"
+  },
+  "description": "AWS DynamoDb",
+  "repository": {
+    "url": "https://github.com/iampeterbanjo/EPT-Assignment",
+    "type": "git",
+    "directory": "packages/dynamodb"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.360.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
+  }
+}
