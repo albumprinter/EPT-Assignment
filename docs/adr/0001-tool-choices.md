@@ -22,5 +22,5 @@ Then I adopt these tools
 
 - [Mermaid markdown](https://mermaid.js.org/intro/) for architecture and scenario diagrams - code first and easy to maintain
 - [Severless framework](https://www.serverless.com/) for API development - facility to run tests and instances locally
-- [React framework](https://react.dev/) for UI - core team develops and maintaints build and testing tools
+- [Vue framework](https://vuejs.org/) for UI - core team develops and maintaints build and testing tools
 - [NPM](https://docs.npmjs.com/getting-started) for package management - default and includes security analysis
