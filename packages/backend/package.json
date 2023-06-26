@@ -9,12 +9,19 @@
     "type": "git",
     "directory": "packages/backend"
   },
+  "scripts": {
+    "start": "serverless deploy"
+  },
   "dependencies": {
     "uuid": "^2.0.3"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
     "aws-sdk": "^2.12.0",
+    "serverless": "^3.32.2",
     "serverless-dynamodb-local": "^0.2.18",
-    "serverless-offline": "^6.8.0"
+    "serverless-offline": "^6.8.0",
+    "serverless-plugin-typescript": "^2.1.5",
+    "typescript": "^5.1.3"
   }
 }
