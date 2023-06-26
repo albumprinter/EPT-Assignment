@@ -1,27 +1,62 @@
-tenant: ac360 # Enter your tenant name here
-app: enterprise # Enter your application name here
-service: demo-email-form
+service: ept-serverless-rest-api-with-dynamodb
 
-frameworkVersion: '>=1.38.0 <2.0.0'
+frameworkVersion: '>=2.24.0'
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      # Comment if you don't have a DynamoDB running locally
+      noStart: true
+    migration:
+      dir: offline/migrations
 
 provider:
   name: aws
-  runtime: nodejs10.x
-  # credentials: ${secrets:aws-enterprise} # Enter an AWS Secret like this, after you create it in the Dashboard.
+  runtime: nodejs18.x
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}'
 
 functions:
-  formSubmit:
-    handler: index.submit
+  list:
+    handler: photos/list.list
     events:
       - http:
-          path: submit
-          method: post
+          path: photos
+          method: get
           cors: true
 
-plugins:
-  # - serverless-finch # If you want to deploy the front-end uncomment this and the "custom" object below
-
-# custom:
-  # client:
-    # bucketName: sfe-demo-email-form # If you want to deploy the front-end, change this to a universally unique AWS S3 bucket name
-    # distributionFolder: ../frontend/build
+resources:
+  Resources:
+    PhotosDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}

@@ -1,5 +1,5 @@
 {
-  "name": "ept-assignment-photo-gallery",
+  "name": "ept-assignment-photo-gallery-app",
   "author": {
     "name": "Peter Banjo"
   },
@@ -9,6 +9,11 @@
   },
   "version": "1.0.0",
   "private": true,
+  "repository": {
+    "url": "https://github.com/iampeterbanjo/EPT-Assignment",
+    "type": "git",
+    "directory": "packages/frontend"
+  },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.16.5",
