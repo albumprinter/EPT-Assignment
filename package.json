@@ -19,12 +19,10 @@
     "start:api": "npm run start --workspace=ept-gallery-api",
     "start:app": "npm run start --workspace=ept-gallery-app",
     "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "gts lint",
     "clean": "gts clean",
-    "compile": "tsc",
     "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
     "posttest": "npm run lint"
   },
   "devDependencies": {

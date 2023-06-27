@@ -1,3 +1,8 @@
 import fastify from 'fastify';
 
-export const api = fastify({ logger: true });
+const server = fastify({logger: true});
+server.get('/photos', () => {
+  return {hello: 'world'};
+});
+
+export const api = server;

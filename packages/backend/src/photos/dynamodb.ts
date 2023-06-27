@@ -1,13 +1,9 @@
+// eslint-disable-next-line node/no-unpublished-import
 import * as AWS from 'aws-sdk';
 
-let options = {};
-
-// connect to local DB if running offline
-if (process.env.IS_OFFLINE) {
-  options = {
-    region: 'localhost',
-    endpoint: 'http://localhost:8000',
-  };
-}
+const options = {
+  region: 'localhost',
+  endpoint: process.env.DB_CONNECTION_STRING,
+};
 
 export const dynamodb = new AWS.DynamoDB.DocumentClient(options);
