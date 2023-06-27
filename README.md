@@ -11,6 +11,8 @@ This is a monorepo using [NPM workspaces](https://docs.npmjs.com/cli/v7/using-np
 - [Architecture](./docs/ARCHITECTURE.md)
 - [Serverless Framework](./docs/serverless/ARCHITECTURE.md)
 - [React](./docs/REACT.md)
+- [Backend](./packages/backend/README.md)
+- [Frontend](./packages/frontend/README.md)
 
 ## Requirements
 
@@ -19,7 +21,19 @@ This is a monorepo using [NPM workspaces](https://docs.npmjs.com/cli/v7/using-np
 
 ## Getting started
 
-### `npm install`
+- Run tests
+
+```bash
+npm install
+npm test
+```
+
+- Development mode
+
+```bash
+npm install
+npm run start # start dynamodb, api and app
+```
 
 ## References
 

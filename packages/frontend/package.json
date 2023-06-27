@@ -1,5 +1,5 @@
 {
-  "name": "ept-assignment-photo-gallery-app",
+  "name": "ept-gallery-app",
   "author": {
     "name": "Peter Banjo"
   },
@@ -14,6 +14,7 @@
     "type": "git",
     "directory": "packages/frontend"
   },
+  "proxy": "http://localhost:7000",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@swc/core": "^1.3.66",
@@ -55,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
   }
 }

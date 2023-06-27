@@ -1,5 +1,5 @@
 {
-  "name": "ept-assignment-photo-gallery-api",
+  "name": "ept-gallery-api",
   "author": {
     "name": "Peter Banjo"
   },
@@ -10,7 +10,7 @@
     "directory": "packages/backend"
   },
   "scripts": {
-    "start": "serverless deploy"
+    "start": "serverless offline start"
   },
   "dependencies": {
     "fastify": "^4.18.0",
