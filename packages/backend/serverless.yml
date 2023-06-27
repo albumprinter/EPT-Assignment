@@ -3,11 +3,36 @@ service: ept-serverless-rest-api
 frameworkVersion: '>=2.24.0'
 
 plugins:
+  - serverless-dotenv-plugin
+  - serverless-esbuild
   - serverless-offline
+
+custom:
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or falls back to what we have set in the provider section.
+  stage: ${opt:stage, 'offline'}
+  esbuild:
+    platform: 'node'
+    target: node18
+    sourcemap: linked
+  serverless-offline:
+    httpPort: 7000
+    noPrependStageInUrl: true
+    reloadHandler: true
 
 provider:
   name: aws
+  stage: ${self:custom.stage}
+  region: 'eu-west-2'
   runtime: nodejs18.x
+  memorySize: 512
+  timeout: 10
+  logRetentionInDays: 90
+  logs:
+    httpApi: true
+  httpApi:
+    # metrics: true # Enable if you need
+    cors: true
   environment:
     DYNAMODB_TABLE: ${self:service}-${sls:stage}
   iam:
@@ -24,13 +49,12 @@ provider:
           Resource: 'arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}'
 
 functions:
-  list:
-    handler: photos/list.list
+  app:
+    handler: src/handler.handler
     events:
-      - http:
-          path: photos
-          method: get
-          cors: true
+      - httpApi:
+          path: '/{proxy+}'
+          method: '*'
 
 resources:
   Resources:
@@ -50,3 +74,7 @@ resources:
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
+
+package:
+  patterns:
+    - '!**/*.test.ts'

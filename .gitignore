@@ -13,6 +13,8 @@ dist
 dist-ssr
 coverage
 build
+.build
+.esbuild
 *.local
 
 .env.local
