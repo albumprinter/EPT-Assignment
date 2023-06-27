@@ -14,7 +14,8 @@ const config = {
   collectCoverage: true,
   collectCoverageFrom: [
     './src/**/*.{js,ts}',
-    '!src/handler.ts',
+    '!src/fixtures/**/*.ts',
+    '!src/**/handler.ts',
     '!**/*.d.ts',
     '!**/node_modules/**',
   ],

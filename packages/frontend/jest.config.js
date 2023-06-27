@@ -6,15 +6,15 @@ const config = {
   },
   roots: ['./src/'],
   testEnvironment: 'jsdom',
-  testMatch: ['**/*.test.{js,ts}'],
+  testMatch: ['**/*.test.{jsx,tsx}'],
   transform: {
     '^.+\\.[jt]s$': ['@swc/jest'],
   },
   clearMocks: true,
   collectCoverage: true,
   collectCoverageFrom: [
-    './src/**/*.{js,ts}',
-    '!src/handler.ts',
+    './src/**/*.{jsx,tsx}',
+    '!src/fixtures/**/*.ts',
     '!**/*.d.ts',
     '!**/node_modules/**',
   ],
