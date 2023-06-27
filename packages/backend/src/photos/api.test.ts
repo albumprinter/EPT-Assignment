@@ -1,8 +1,8 @@
-import { app } from './app';
+import { api } from './api';
 
-describe('app', () => {
+describe('api', () => {
   it(`should respond`, async () => {
-    const response = await app.inject({
+    const response = await api.inject({
       method: 'GET',
       path: '/photos',
     });
