@@ -50,7 +50,7 @@ provider:
 
 functions:
   app:
-    handler: src/handler.handler
+    handler: src/photos/handler.handler
     events:
       - httpApi:
           path: '/{proxy+}'
