@@ -16,7 +16,7 @@ custom:
     target: node18
     sourcemap: linked
   serverless-offline:
-    httpPort: 7000
+    httpPort: ${self:provider.environment.SERVER_PORT}
     noPrependStageInUrl: true
     reloadHandler: true
 

@@ -13,9 +13,9 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "concurrently \"npm run start:db\" \"npm run start:api\" \"npm run start:app\"",
-    "start:db": "docker compose -f docker-compose.yml up --build --force-recreate",
-    "stop:db": "docker compose down -v",
+    "start": "concurrently \"npm run start:up\" \"npm run start:api\" \"npm run start:app\"",
+    "start:up": "docker compose -f docker-compose.yml up --build --force-recreate",
+    "down": "docker compose down -v",
     "start:api": "npm run start --workspace=ept-gallery-api",
     "start:app": "npm run start --workspace=ept-gallery-app",
     "test": "jest"

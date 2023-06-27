@@ -1,13 +1,43 @@
 version: '3.7'
 services:
+  api:
+    container_name: ept-gallery-api
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile
+    ports:
+      - 9000:9000
+      - 9229:9229
+    environment:
+    - PORT=9000
+    - CONNECTIONSTRING=http://dynamodb:8000
+    volumes:
+    - ./packages/backend:/usr/src/app
+    - /usr/src/app/node_modules
+    command: npm start
+    depends_on:
+      - dynamodb
+
+  dynamodb_admin:
+    image: aaronshaf/dynamodb-admin
+    container_name: ept-gallery-dynamodb_admin
+    ports:
+      - "8001:8001"
+    environment:
+      - DYNAMO_ENDPOINT=http://dynamodb:8000
+    depends_on:
+      - dynamodb
+    restart: unless-stopped
+
   dynamodb:
     image: amazon/dynamodb-local
     hostname: dynamodb-local
-    container_name: dynamodb-local
+    container_name: ept-gallery-dynamodb-local
     ports:
       - 8000:8000
 
   dynamodb_seed:
+    container_name: ept-gallery-dynamodb-seed
     build:
       context: ./packages/dynamodb/
       dockerfile: Dockerfile
