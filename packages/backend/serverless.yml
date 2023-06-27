@@ -1,33 +1,9 @@
-service: ept-serverless-rest-api-with-dynamodb
+service: ept-serverless-rest-api
 
 frameworkVersion: '>=2.24.0'
 
 plugins:
-  - serverless-dynamodb-local
   - serverless-offline
-
-custom:
-  dynamodb:
-    stages:
-      - dev
-    start:
-      # docker: true
-      port: 8000
-      inMemory: true
-      migrate: true
-      seed: true
-      sharedDb: true
-      convertEmptyValues: true
-      # uncomment if you already have a DynamoDB running locally
-      noStart: true
-      migration:
-        dir: offline/migrations
-
-    seed:
-      domain:
-        sources:
-          - table: photos
-            sources: [./seed/photos.json]
 
 provider:
   name: aws
