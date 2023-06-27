@@ -47,6 +47,14 @@ npm install
 npm run start # start dynamodb, api and app
 ```
 
+- View database collection(s)
+
+```bash
+docker compose up --build dynamodb_admin
+```
+
+Then go to [Dynamodb admin](http://localhost:8001/tables/Photos);
+
 Create-react-app v5 has [broken hot-reloading in Docker](https://github.com/facebook/create-react-app/issues/11879).
 
 ## References

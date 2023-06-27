@@ -1,9 +1,12 @@
-// eslint-disable-next-line node/no-unpublished-import
-import * as AWS from 'aws-sdk';
+import {DynamoDBClient} from '@aws-sdk/client-dynamodb';
 
 const options = {
   region: 'localhost',
-  endpoint: process.env.DB_CONNECTION_STRING,
+  endpoint: 'http://localhost:8000',
+  credentials: {
+    accessKeyId: process.env['AWS_ACCESS_KEY'] || '[fake]',
+    secretAccessKey: process.env['AWS_SECRET_KEY'] || '[fake]',
+  },
 };
 
-export const dynamodb = new AWS.DynamoDB.DocumentClient(options);
+export const dynamodb = new DynamoDBClient(options);

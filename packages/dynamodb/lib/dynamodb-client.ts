@@ -1,4 +1,4 @@
-import { DynamoDBClient, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
+import {DynamoDBClient, DynamoDBClientConfig} from '@aws-sdk/client-dynamodb';
 
 const config: DynamoDBClientConfig = {
   region: process.env['AWS_REGION'] || 'eu-west-2',
@@ -12,6 +12,4 @@ if (!process.env['AWS_ACCESS_KEY'] && !process.env['AWS_SECRET_KEY']) {
   config.endpoint = 'http://dynamodb:8000';
 }
 
-const dynamodb = new DynamoDBClient(config);
-
-export default dynamodb;
+export const dynamodb = new DynamoDBClient(config);

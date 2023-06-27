@@ -1,11 +1,8 @@
-import type {
-  AttributeValue,
-  ScanCommandInput,
-} from '@aws-sdk/client-dynamodb';
-import { ScanCommand } from '@aws-sdk/client-dynamodb';
-import dynamodb from './dynamodb-client';
+import type {AttributeValue, ScanCommandInput} from '@aws-sdk/client-dynamodb';
+import {ScanCommand} from '@aws-sdk/client-dynamodb';
+import {dynamodb} from './dynamodb-client';
 
-const tableName = `Post`;
+const tableName = 'Photos';
 
 export type PhotoExtraEntity = {
   rotate?: number;
@@ -24,25 +21,22 @@ export type DynamoPhotoEntity = {
   id: AttributeValue;
   orderCount: AttributeValue;
   category: AttributeValue;
-  extra?: { M: AttributeValue };
+  extra?: {M: AttributeValue};
 };
 
-export async function getPhotos(options?: {
-  limit?: number;
-  startkey?: string;
-}) {
-  const { limit, startkey } = options || {};
+export async function getPhotos(options?: {limit?: number; startkey?: string}) {
+  const {limit, startkey} = options || {};
   const params: ScanCommandInput = {
     TableName: tableName,
     ConsistentRead: false,
-    ProjectionExpression: `id, orderCount, category, extra`,
+    ProjectionExpression: 'id, orderCount, category, extra',
   };
   if (limit) {
     params.Limit = limit;
   }
   if (startkey) {
     params.ExclusiveStartKey = {
-      id: { S: startkey },
+      id: {S: startkey},
     };
   }
   return dynamodb.send(new ScanCommand(params));

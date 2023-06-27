@@ -46,10 +46,14 @@ services:
       - DYNAMO_ENDPOINT=http://dynamodb:8000
     depends_on:
       - dynamodb
+      - dynamodb_seed
     restart: unless-stopped
 
   dynamodb:
     image: amazon/dynamodb-local
+    command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal
+    volumes:
+     - dynamodb_data:/home/dynamodblocal
     hostname: dynamodb-local
     container_name: ept-gallery-dynamodb-local
     ports:
@@ -64,3 +68,8 @@ services:
       - /usr/src/app/node_modules
     depends_on:
       - dynamodb
+
+volumes:
+  dynamodb_data:
+    driver: local
+
