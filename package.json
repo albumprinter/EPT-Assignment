@@ -18,12 +18,22 @@
     "down": "docker compose down -v",
     "start:api": "npm run start --workspace=ept-gallery-api",
     "start:app": "npm run start --workspace=ept-gallery-app",
-    "test": "jest"
+    "test": "jest",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",
     "jest": "27.5.1",
     "jest-config": "27.5.1",
-    "jest-environment-node": "27.5.1"
+    "jest-environment-node": "27.5.1",
+    "gts": "^3.1.1",
+    "typescript": "~4.7.0",
+    "@types/node": "^14.11.2"
   }
 }
