@@ -8,6 +8,8 @@ WORKDIR /usr/app
 
 COPY package*.json ./
 
+ENV PATH /usr/app/node_modules/.bin:$PATH
+
 RUN npm install --legacy-peer-deps
 
 COPY . /usr/app

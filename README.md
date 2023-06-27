@@ -21,6 +21,18 @@ This is a monorepo using [NPM workspaces](https://docs.npmjs.com/cli/v7/using-np
 
 ## Getting started
 
+- Quick start - run frontend, backend and db in Docker.
+
+```bash
+npm run start:up
+```
+
+- Stop all docker containers
+
+```bash
+npm run down
+```
+
 - Run tests
 
 ```bash
@@ -34,6 +46,8 @@ npm test
 npm install
 npm run start # start dynamodb, api and app
 ```
+
+Create-react-app v5 has [broken hot-reloading in Docker](https://github.com/facebook/create-react-app/issues/11879).
 
 ## References
 

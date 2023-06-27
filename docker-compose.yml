@@ -1,22 +1,41 @@
 version: '3.7'
 services:
-  api:
-    container_name: ept-gallery-api
+  backend:
+    container_name: ept-gallery-backend
     build:
       context: ./packages/backend
       dockerfile: Dockerfile
+    env_file: ./packages/backend/.env
     ports:
       - 9000:9000
       - 9229:9229
     environment:
-    - PORT=9000
-    - CONNECTIONSTRING=http://dynamodb:8000
+    - DB_CONNECTION_STRING=http://dynamodb:8000
     volumes:
     - ./packages/backend:/usr/src/app
     - /usr/src/app/node_modules
     command: npm start
     depends_on:
       - dynamodb
+
+  frontend:
+    container_name: ept-gallery-frontend
+    build:
+      context: ./packages/frontend
+      dockerfile: Dockerfile
+    env_file: ./packages/frontend/.env
+    environment:
+      - WATCHPACK_POLLING=true
+      - WDS_SOCKET_PORT=3210
+      - WDS_SOCKET_HOST=127.0.0.1
+    ports:
+      - 3210:3210
+    volumes:
+    - ./packages/frontend:/usr/src/app
+    - /usr/src/app/node_modules
+    command: npm start
+    depends_on:
+      - backend
 
   dynamodb_admin:
     image: aaronshaf/dynamodb-admin
