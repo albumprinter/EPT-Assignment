@@ -42,12 +42,20 @@ export const PhotosReply = Type.Array(
 
 export type PhotosReplyType = Static<typeof PhotosReply>;
 
+export const PhotosQueryTexture = Type.Union([
+  Type.Literal('canvas'),
+  Type.Literal('glossy'),
+]);
+
 export const PhotosQuery = Type.Optional(
   Type.Partial(
     Type.Object({
       sortBy: Type.Literal('orderCount'),
+      texture: PhotosQueryTexture,
     })
   )
 );
+
+export type PhotosQueryTextureType = Static<typeof PhotosQueryTexture>;
 
 export type PhotosQueryType = Static<typeof PhotosQuery>;

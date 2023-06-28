@@ -1,6 +1,6 @@
 import {TypeBoxTypeProvider} from '@fastify/type-provider-typebox';
 import Fastify from 'fastify';
-import {findAll, sortedByOrderCount} from '../db/commands';
+import {filterByTexture, findAll, sortedByOrderCount} from '../db/commands';
 import {getPhotos} from '../db/photosTable';
 import {
   PhotosQuery,
@@ -29,13 +29,15 @@ server.get<{
     },
   },
   async req => {
+    // for simplicity we assume that sorting AND filtering
+    // are not done at the same time
     if (req.query.sortBy === 'orderCount') {
-      const {Items = []} = await getPhotos(sortedByOrderCount);
-
-      return Items;
+      return getPhotos(sortedByOrderCount);
     }
-    const {Items = []} = await getPhotos(findAll);
-    return Items;
+    if (req.query.texture) {
+      return getPhotos(filterByTexture(req.query.texture));
+    }
+    return getPhotos(findAll);
   }
 );
 
