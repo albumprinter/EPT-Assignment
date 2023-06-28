@@ -24,26 +24,30 @@ This is a monorepo using [NPM workspaces](https://docs.npmjs.com/cli/v7/using-np
 - Quick start - run frontend, backend and db in Docker.
 
 ```bash
-npm run start:up
+npm run docker-up
 ```
 
 - Stop all docker containers
 
 ```bash
-npm run down
+npm run docker-down
+```
+
+- Install root, api and app packages
+
+```bash
+npm install
 ```
 
 - Run tests
 
 ```bash
-npm install
 npm test
 ```
 
 - Development mode
 
 ```bash
-npm install
 npm run start # start dynamodb, api and app
 ```
 
