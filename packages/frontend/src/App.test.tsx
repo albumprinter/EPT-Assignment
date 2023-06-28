@@ -18,8 +18,9 @@ test('when the App renders then it displays images from API', async () => {
   expect(images).toHaveProperty('length', 3);
 });
 
-test(`when the App renders and the sort button is clicked
-then the correct request is made`, async () => {
+test(`when the App renders and the sort by Order count button is clicked
+And the request is made
+then the sort by Order count button is disabled`, async () => {
   render(<App />);
 
   userEvent.click(screen.getByRole('button', {name: /Sort by order count/i}));

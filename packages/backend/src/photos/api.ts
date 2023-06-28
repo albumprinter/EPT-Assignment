@@ -1,12 +1,14 @@
 import {TypeBoxTypeProvider} from '@fastify/type-provider-typebox';
 import Fastify from 'fastify';
 import {getPhotos} from '../db/photosTable';
-import {PhotosReply, PhotosReplyType} from './types';
+import {PhotosReply, PhotosReplyType} from './validation';
 
+// Fastify is an express compatible framework with exceptional features
 const server = Fastify({
   logger: process.env.NODE_ENV !== 'test',
 }).withTypeProvider<TypeBoxTypeProvider>();
 
+// validate and type check response
 server.get<{Reply: PhotosReplyType}>(
   '/photos',
   {
