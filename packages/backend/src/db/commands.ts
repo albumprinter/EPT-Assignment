@@ -10,7 +10,7 @@ export const findAll = new ExecuteStatementCommand({
 
 // find all photos sorted by order count
 export const sortedByOrderCount = new ExecuteStatementCommand({
-  Statement: `SELECT * FROM ${tableName} ORDER BY orderCount ASC`,
+  Statement: `SELECT * FROM ${tableName} WHERE id != 'image_null' ORDER BY orderCount ASC`,
   ConsistentRead: true,
 });
 
