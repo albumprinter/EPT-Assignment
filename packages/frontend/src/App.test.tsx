@@ -1,9 +1,18 @@
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders learn react link', async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  await waitForElementToBeRemoved(screen.queryByText(/Loading/i));
+
+  const images = screen.getAllByRole('img');
+  expect(images[0]).toBeInTheDocument();
+  expect(images).toHaveProperty('length', 3);
 });

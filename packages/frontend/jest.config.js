@@ -1,3 +1,5 @@
+const {defaults} = require('jest-config');
+
 /** @type {import('jest').Config} */
 const config = {
   displayName: {
@@ -8,7 +10,7 @@ const config = {
   testEnvironment: 'jsdom',
   testMatch: ['**/*.test.{jsx,tsx}'],
   transform: {
-    '^.+\\.[jt]sx$': ['@swc/jest'],
+    '^.+\\.(ts|tsx)$': ['@swc/jest'],
   },
   clearMocks: true,
   collectCoverage: true,
@@ -25,7 +27,9 @@ const config = {
     '^[./a-zA-Z0-9$_-]+\\.png$': '<rootDir>/__mocks__/assets.js',
     '\\.(css|less|svg)$': '<rootDir>/__mocks__/assets.js',
   },
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+  setupFiles: ['<rootDir>/src/setupTests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTestsAfterEnv.ts'],
+  moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
 };
 
 module.exports = config;
