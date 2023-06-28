@@ -49,3 +49,5 @@ export const PhotosQuery = Type.Optional(
     })
   )
 );
+
+export type PhotosQueryType = Static<typeof PhotosQuery>;

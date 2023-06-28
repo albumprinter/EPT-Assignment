@@ -1,4 +1,5 @@
 import {ExecuteStatementCommand} from '@aws-sdk/lib-dynamodb';
+import {sortedByOrderCount} from '../db/commands';
 import * as db from '../db/dynamodb-client';
 import {api} from './api';
 
@@ -36,7 +37,9 @@ const mockDbOutputPhotos = {
 };
 const mockDynamodbSend = db.partiQL.send as jest.Mock;
 
-beforeEach(jest.resetAllMocks);
+afterEach(jest.resetAllMocks);
+
+beforeEach(() => mockDynamodbSend.mockResolvedValue(mockDbOutputPhotos));
 
 test('given GET /photos then api responds', async () => {
   const response = await api.inject({
@@ -51,8 +54,6 @@ test(`given GET /photos
   then api should respond with 200 statusCode
   And 3 photos
   And response data is correct`, async () => {
-  mockDynamodbSend.mockResolvedValue(mockDbOutputPhotos);
-
   const {statusCode, body} = await api.inject({
     method: 'GET',
     path: '/photos',
@@ -83,7 +84,7 @@ test(`given GET /photos
 });
 
 test(`given GET /photos
-And sortBy query param is NOT allowed
+and sortBy query is NOT allowed
 then statusCode is 400`, async () => {
   const {statusCode} = await api.inject({
     method: 'GET',
@@ -94,4 +95,19 @@ then statusCode is 400`, async () => {
   });
 
   expect(statusCode).toEqual(400);
+});
+
+test(`given GET /photos
+and sortBy query is "orderCount"
+then statusCode is 200`, async () => {
+  const {statusCode} = await api.inject({
+    method: 'GET',
+    path: '/photos',
+    query: {
+      sortBy: 'orderCount',
+    },
+  });
+
+  expect(statusCode).toEqual(200);
+  expect(mockDynamodbSend).toHaveBeenCalledWith(sortedByOrderCount);
 });
