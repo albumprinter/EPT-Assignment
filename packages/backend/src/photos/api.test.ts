@@ -1,9 +1,10 @@
-import * as lib from '../lib';
+import {ScanCommand} from '@aws-sdk/client-dynamodb';
+import * as db from '../lib/dynamodb-client';
 import {api} from './api';
 
-jest.mock('../lib', () => {
+jest.mock('../lib/dynamodb-client', () => {
   return {
-    getPhotos: jest.fn(),
+    dynamodb: {send: jest.fn()},
   };
 });
 
@@ -29,8 +30,11 @@ const mockPhotos = {
     },
   ],
 };
+const mockDynamodbSend = db.dynamodb.send as jest.Mock;
 
 describe('api', () => {
+  beforeEach(jest.resetAllMocks);
+
   it('should respond', async () => {
     const response = await api.inject({
       method: 'GET',
@@ -42,7 +46,8 @@ describe('api', () => {
 
   it(`should respond with 200 statusCode
   And 3 photos when GET /photos`, async () => {
-    jest.spyOn(lib, 'getPhotos').mockResolvedValue(mockPhotos as any);
+    mockDynamodbSend.mockResolvedValue(mockPhotos);
+
     const {statusCode, body} = await api.inject({
       method: 'GET',
       path: '/photos',
@@ -52,5 +57,6 @@ describe('api', () => {
 
     expect(statusCode).toEqual(200);
     expect(data).toHaveProperty('length', 3);
+    expect(mockDynamodbSend).toHaveBeenCalledWith(expect.any(ScanCommand));
   });
 });
