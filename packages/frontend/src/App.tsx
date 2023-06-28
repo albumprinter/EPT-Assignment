@@ -18,9 +18,11 @@ function App() {
 
   return (
     <div>
-      <header>Photo Gallery</header>
+      <header>
+        <h1>Photo Gallery</h1>
+      </header>
       <main>
-        <ul>
+        <ul className="grid list-none">
           {photos?.map((photo: PhotoEntity) => (
             <li key={photo.id}>
               <img
