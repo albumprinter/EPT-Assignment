@@ -1,12 +1,14 @@
 import {
   render,
   screen,
+  waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from './App';
 
-test('renders App displays images from API', async () => {
+test('when the App renders then it displays images from API', async () => {
   render(<App />);
 
   await waitForElementToBeRemoved(screen.queryByText(/Loading/i));
@@ -14,4 +16,17 @@ test('renders App displays images from API', async () => {
   const images = screen.getAllByRole('img');
   expect(images[0]).toBeInTheDocument();
   expect(images).toHaveProperty('length', 3);
+});
+
+test(`when the App renders and the sort button is clicked
+then the correct request is made`, async () => {
+  render(<App />);
+
+  userEvent.click(screen.getByRole('button', {name: /Sort by order count/i}));
+
+  await waitFor(() =>
+    expect(
+      screen.getByRole('button', {name: /Sort by order count/i})
+    ).toBeDisabled()
+  );
 });

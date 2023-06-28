@@ -22,12 +22,16 @@ h1 {
 }
 
 .list-none {
-  margin: 0;
   list-style: none;
 }
 
 .grid {
   columns: 3;
+}
+
+.wide {
+  margin: 0;
+  padding: 0;
   max-width: 90vw;
 }
 
