@@ -4,20 +4,24 @@ import {partiQL} from './dynamodb-client';
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 
+type AttributeValueString = {S: string};
+type AttributeValueNumber = {N: number};
+type AttributeValueMap<T> = {M: T};
+
 export type PhotoExtraEntity = {
-  rotate?: number;
-  border?: number;
-  texture?: string;
+  rotate?: AttributeValueNumber;
+  border?: AttributeValueNumber;
+  texture?: AttributeValueString;
 };
 
 export type PhotoEntity = {
-  id: string;
-  orderCount: number;
-  category: string;
-  extra?: PhotoExtraEntity;
+  id: AttributeValueString;
+  orderCount: AttributeValueNumber;
+  category: AttributeValueString;
+  extra?: AttributeValueMap<PhotoExtraEntity>;
 };
 
-type PhotoCommandOutput = Modify<
+export type PhotoCommandOutput = Modify<
   ExecuteStatementCommandOutput,
   {
     Items?: PhotoEntity[];

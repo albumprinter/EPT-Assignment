@@ -8,13 +8,19 @@ jest.mock('../db/dynamodb-client', () => {
   };
 });
 
-const mockPhotos = {
+const mockDbOutputPhotos = {
   Items: [
     {
       orderCount: {N: '350'},
       id: {S: 'image_10'},
       category: {S: 'poster'},
-      extra: {M: {texture: {S: 'canvas'}}},
+      extra: {
+        M: {
+          texture: {S: 'glossy'},
+          border: {N: '5'},
+          rotate: {N: '90'},
+        },
+      },
     },
     {
       orderCount: {N: '3000'},
@@ -45,8 +51,9 @@ describe('api', () => {
   });
 
   it(`should respond with 200 statusCode
-  And 3 photos when GET /photos`, async () => {
-    mockDynamodbSend.mockResolvedValue(mockPhotos);
+  And 3 photos when GET /photos
+  And response data is correct`, async () => {
+    mockDynamodbSend.mockResolvedValue(mockDbOutputPhotos);
 
     const {statusCode, body} = await api.inject({
       method: 'GET',
@@ -59,6 +66,21 @@ describe('api', () => {
     expect(data).toHaveProperty('length', 3);
     expect(mockDynamodbSend).toHaveBeenCalledWith(
       expect.any(ExecuteStatementCommand)
+    );
+    expect(data[0]).toEqual(
+      expect.objectContaining({
+        id: 'image_10',
+        orderCount: expect.any(Number),
+        category: expect.any(String),
+      })
+    );
+    expect(data[0]).toHaveProperty(
+      'extra',
+      expect.objectContaining({
+        texture: expect.any(String),
+        border: expect.any(Number),
+        rotate: expect.any(Number),
+      })
     );
   });
 });
