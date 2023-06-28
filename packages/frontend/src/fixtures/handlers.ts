@@ -2,22 +2,22 @@ import {rest} from 'msw';
 
 const mockPhotos = [
   {
-    orderCount: {N: '350'},
-    id: {S: 'image_10'},
-    category: {S: 'poster'},
-    extra: {M: {texture: {S: 'canvas'}}},
+    orderCount: '350',
+    id: 'image_10',
+    category: 'poster',
+    extra: {texture: 'canvas'},
   },
   {
-    orderCount: {N: '3000'},
-    id: {S: 'image_13'},
-    category: {S: 'card'},
-    extra: {M: {border: {N: '5'}}},
+    orderCount: '3000',
+    id: 'image_13',
+    category: 'card',
+    extra: {border: '5'},
   },
   {
-    orderCount: {N: '112800'},
-    id: {S: 'image_5'},
-    category: {S: 'poster'},
-    extra: {M: {texture: {S: 'glossy'}}},
+    orderCount: '112800',
+    id: 'image_5',
+    category: 'poster',
+    extra: {texture: 'glossy'},
   },
 ];
 export const handlers = [
