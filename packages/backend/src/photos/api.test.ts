@@ -1,10 +1,10 @@
-import {ScanCommand} from '@aws-sdk/client-dynamodb';
+import {ExecuteStatementCommand} from '@aws-sdk/lib-dynamodb';
 import * as db from '../lib/dynamodb-client';
 import {api} from './api';
 
 jest.mock('../lib/dynamodb-client', () => {
   return {
-    dynamodb: {send: jest.fn()},
+    partiQL: {send: jest.fn()},
   };
 });
 
@@ -30,7 +30,7 @@ const mockPhotos = {
     },
   ],
 };
-const mockDynamodbSend = db.dynamodb.send as jest.Mock;
+const mockDynamodbSend = db.partiQL.send as jest.Mock;
 
 describe('api', () => {
   beforeEach(jest.resetAllMocks);
@@ -57,6 +57,8 @@ describe('api', () => {
 
     expect(statusCode).toEqual(200);
     expect(data).toHaveProperty('length', 3);
-    expect(mockDynamodbSend).toHaveBeenCalledWith(expect.any(ScanCommand));
+    expect(mockDynamodbSend).toHaveBeenCalledWith(
+      expect.any(ExecuteStatementCommand)
+    );
   });
 });

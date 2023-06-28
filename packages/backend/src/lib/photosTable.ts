@@ -1,8 +1,13 @@
-import type {AttributeValue, ScanCommandInput} from '@aws-sdk/client-dynamodb';
-import {ScanCommand} from '@aws-sdk/client-dynamodb';
-import {dynamodb} from './dynamodb-client';
+import type {AttributeValue} from '@aws-sdk/client-dynamodb';
+import {ExecuteStatementCommand} from '@aws-sdk/lib-dynamodb';
+import {partiQL} from './dynamodb-client';
 
 const tableName = 'Photos';
+
+export const findAllPhotos = new ExecuteStatementCommand({
+  Statement: `SELECT * FROM ${tableName}`,
+  ConsistentRead: true,
+});
 
 export type PhotoExtraEntity = {
   rotate?: number;
@@ -25,11 +30,5 @@ export type DynamoPhotoEntity = {
 };
 
 export async function getPhotos() {
-  const params: ScanCommandInput = {
-    TableName: tableName,
-    ConsistentRead: false,
-    ProjectionExpression: 'id, orderCount, category, extra',
-  };
-
-  return dynamodb.send(new ScanCommand(params));
+  return partiQL.send(findAllPhotos);
 }
