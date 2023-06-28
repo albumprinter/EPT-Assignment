@@ -1,22 +1,19 @@
+import {ExecuteStatementCommandOutput} from '@aws-sdk/client-dynamodb';
 import {Static, Type} from '@sinclair/typebox';
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 
-type AttributeValueString = {S: string};
-type AttributeValueNumber = {N: number};
-type AttributeValueMap<T> = {M: T};
-
 export type PhotoExtraEntity = {
-  rotate?: AttributeValueNumber;
-  border?: AttributeValueNumber;
-  texture?: AttributeValueString;
+  rotate?: number;
+  border?: number;
+  texture?: string;
 };
 
 export type PhotoEntity = {
-  id: AttributeValueString;
-  orderCount: AttributeValueNumber;
-  category: AttributeValueString;
-  extra?: AttributeValueMap<PhotoExtraEntity>;
+  id: string;
+  orderCount: number;
+  category: string;
+  extra?: PhotoExtraEntity;
 };
 
 export type PhotoCommandOutput = Modify<

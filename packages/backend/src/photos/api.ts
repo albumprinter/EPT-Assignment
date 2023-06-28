@@ -1,7 +1,6 @@
 import {TypeBoxTypeProvider} from '@fastify/type-provider-typebox';
 import Fastify from 'fastify';
 import {getPhotos} from '../db/photosTable';
-import {parseDbOutput} from './parseDbOutput';
 import {PhotosReply, PhotosReplyType} from './types';
 
 const server = Fastify({
@@ -19,7 +18,7 @@ server.get<{Reply: PhotosReplyType}>(
   },
   async () => {
     const {Items = []} = await getPhotos();
-    return parseDbOutput(Items);
+    return Items;
   }
 );
 

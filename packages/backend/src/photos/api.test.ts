@@ -11,28 +11,26 @@ jest.mock('../db/dynamodb-client', () => {
 const mockDbOutputPhotos = {
   Items: [
     {
-      orderCount: {N: '350'},
-      id: {S: 'image_10'},
-      category: {S: 'poster'},
+      orderCount: '350',
+      id: 'image_10',
+      category: 'poster',
       extra: {
-        M: {
-          texture: {S: 'glossy'},
-          border: {N: '5'},
-          rotate: {N: '90'},
-        },
+        texture: 'glossy',
+        border: '5',
+        rotate: '90',
       },
     },
     {
-      orderCount: {N: '3000'},
-      id: {S: 'image_13'},
-      category: {S: 'card'},
-      extra: {M: {border: {N: '5'}}},
+      orderCount: '3000',
+      id: 'image_13',
+      category: 'card',
+      extra: {border: '5'},
     },
     {
-      orderCount: {N: '112800'},
-      id: {S: 'image_5'},
-      category: {S: 'poster'},
-      extra: {M: {texture: {S: 'glossy'}}},
+      orderCount: '112800',
+      id: 'image_5',
+      category: 'poster',
+      extra: {texture: 'glossy'},
     },
   ],
 };
