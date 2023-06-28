@@ -1,10 +1,10 @@
 import fastify from 'fastify';
-import {getPhotos} from '../lib';
+import {getPhotos} from '../db/photosTable';
 
 const server = fastify({logger: process.env.NODE_ENV !== 'test'});
 server.get('/photos', async () => {
-  const result = await getPhotos();
-  return result.Items;
+  const {Items = []} = await getPhotos();
+  return Items;
 });
 
 export const api = server;

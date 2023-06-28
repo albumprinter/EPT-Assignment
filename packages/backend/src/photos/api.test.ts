@@ -1,8 +1,8 @@
 import {ExecuteStatementCommand} from '@aws-sdk/lib-dynamodb';
-import * as db from '../lib/dynamodb-client';
+import * as db from '../db/dynamodb-client';
 import {api} from './api';
 
-jest.mock('../lib/dynamodb-client', () => {
+jest.mock('../db/dynamodb-client', () => {
   return {
     partiQL: {send: jest.fn()},
   };
