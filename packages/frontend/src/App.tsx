@@ -17,16 +17,20 @@ function App() {
   if (error) return <h1>Failed to load photos</h1>;
 
   return (
-    <div className="App">
-      <header className="App-header">
-        {photos?.map((photo: PhotoEntity) => (
-          <img
-            key={photo.id}
-            src={`/images/${photo.id}`}
-            alt={photo.category}
-          />
-        ))}
-      </header>
+    <div>
+      <header>Photo Gallery</header>
+      <main>
+        <ul>
+          {photos?.map((photo: PhotoEntity) => (
+            <li key={photo.id}>
+              <img
+                src={`${process.env.REACT_APP_PUBLIC_URL}/images/${photo.id}.jpg`}
+                alt={photo.category}
+              />
+            </li>
+          ))}
+        </ul>
+      </main>
     </div>
   );
 }

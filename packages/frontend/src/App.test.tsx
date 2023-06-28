@@ -6,7 +6,7 @@ import {
 import React from 'react';
 import App from './App';
 
-test('renders learn react link', async () => {
+test('renders App displays images from API', async () => {
   render(<App />);
 
   await waitForElementToBeRemoved(screen.queryByText(/Loading/i));
