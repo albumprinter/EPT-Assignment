@@ -41,3 +41,11 @@ export const PhotosReply = Type.Array(
 );
 
 export type PhotosReplyType = Static<typeof PhotosReply>;
+
+export const PhotosQuery = Type.Optional(
+  Type.Partial(
+    Type.Object({
+      sortBy: Type.Literal('orderCount'),
+    })
+  )
+);

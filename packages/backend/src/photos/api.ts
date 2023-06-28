@@ -1,7 +1,7 @@
 import {TypeBoxTypeProvider} from '@fastify/type-provider-typebox';
 import Fastify from 'fastify';
 import {getPhotos} from '../db/photosTable';
-import {PhotosReply, PhotosReplyType} from './validation';
+import {PhotosQuery, PhotosReply, PhotosReplyType} from './validation';
 
 // Fastify is an express compatible framework with exceptional features
 const server = Fastify({
@@ -13,6 +13,7 @@ server.get<{Reply: PhotosReplyType}>(
   '/photos',
   {
     schema: {
+      querystring: PhotosQuery,
       response: {
         200: PhotosReply,
       },

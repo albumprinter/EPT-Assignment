@@ -81,3 +81,17 @@ test(`given GET /photos
     })
   );
 });
+
+test(`given GET /photos
+And sortBy query param is NOT allowed
+then statusCode is 400`, async () => {
+  const {statusCode} = await api.inject({
+    method: 'GET',
+    path: '/photos',
+    query: {
+      sortBy: 'not-allowed',
+    },
+  });
+
+  expect(statusCode).toEqual(400);
+});
