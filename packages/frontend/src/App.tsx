@@ -1,9 +1,13 @@
 import React, {FormEventHandler, useState} from 'react';
 import useSWR from 'swr';
+import {FormAction} from './FormAction';
 import {PhotoEntity} from './Photo';
-import {allPhotos, photosSortByOrderCount, photosTextureGlossy} from './urls';
-
-const fetcher = (url: string) => fetch(url).then(res => res.json());
+import {
+  allPhotos,
+  fetcher,
+  photosSortByOrderCount,
+  photosTextureGlossy,
+} from './urls';
 
 function App() {
   const [url, setUrl] = useState(allPhotos);
@@ -39,26 +43,18 @@ function App() {
       <main>
         <ul className="cf ph2-ns list-none">
           <li className="fl w-100 pa2">
-            <form onSubmit={handleSortGallery}>
-              <label htmlFor="sortByOrderCount">
-                <input
-                  disabled={isSortedByOrderCount}
-                  type="submit"
-                  name="sortByOrderCount"
-                  value="Sort by order count"
-                />
-              </label>
-            </form>
-            <form onSubmit={handleFilterByTexture}>
-              <label htmlFor="filterByTextureGlossy">
-                <input
-                  disabled={isFilteredByTextureGlossy}
-                  type="submit"
-                  name="filterByTextureGlossy"
-                  value="Filter by glossy"
-                />
-              </label>
-            </form>
+            <FormAction
+              id="sortByOrderCount"
+              text="Sort by order count"
+              onSubmit={handleSortGallery}
+              disabled={isSortedByOrderCount}
+            />
+            <FormAction
+              id="filterByTextureGlossy"
+              text="Filter by glossy"
+              onSubmit={handleFilterByTexture}
+              disabled={isFilteredByTextureGlossy}
+            />
           </li>
           {photos?.map(
             ({id, category, orderCount, extra = {}}: PhotoEntity) => {
