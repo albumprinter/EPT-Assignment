@@ -1,6 +1,7 @@
 import React, {FormEventHandler, useState} from 'react';
 import useSWR from 'swr';
 import {FormAction} from './FormAction';
+import {rotationClass} from './ImageEffects';
 import {PhotoEntity} from './Photo';
 import {
   allPhotos,
@@ -33,17 +34,6 @@ function App() {
     setSortOrderCount(false);
 
     event.preventDefault();
-  };
-
-  const rotationClass = (rotation: number): string => {
-    switch (rotation) {
-      case 90:
-        return `rotate-90`;
-      case 180:
-        return `rotate-180`;
-      default:
-        return '';
-    }
   };
 
   return (
