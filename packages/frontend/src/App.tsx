@@ -1,12 +1,12 @@
 import React, {FormEventHandler, useState} from 'react';
 import useSWR from 'swr';
 import {PhotoEntity} from './Photo';
+import {allPhotos, photosSortByOrderCount, photosTextureGlossy} from './urls';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 function App() {
-  const defaultUrl = `${process.env.REACT_APP_PROXY}/photos`;
-  const [url, setUrl] = useState(defaultUrl);
+  const [url, setUrl] = useState(allPhotos);
   const {data: photos, error, isLoading} = useSWR(url, fetcher);
   const [isSortedByOrderCount, setSortOrderCount] = useState(false);
   const [isFilteredByTextureGlossy, setFilterByTextureGlossy] = useState(false);
@@ -16,7 +16,7 @@ function App() {
   if (error) return <h1>Failed to load photos</h1>;
 
   const handleSortGallery: FormEventHandler<HTMLFormElement> = event => {
-    setUrl(`${process.env.REACT_APP_PROXY}/photos?sortBy=orderCount`);
+    setUrl(photosSortByOrderCount);
     setSortOrderCount(true);
     setFilterByTextureGlossy(false);
 
@@ -24,7 +24,7 @@ function App() {
   };
 
   const handleFilterByTexture: FormEventHandler<HTMLFormElement> = event => {
-    setUrl(`${process.env.REACT_APP_PROXY}/photos?texture=glossy`);
+    setUrl(photosTextureGlossy);
     setFilterByTextureGlossy(true);
     setSortOrderCount(false);
 
