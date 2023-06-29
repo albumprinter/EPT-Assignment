@@ -10,7 +10,8 @@
     "directory": "packages/backend"
   },
   "scripts": {
-    "start": "serverless offline start"
+    "start": "serverless offline start",
+    "deploy": "serverless deploy"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.360.0",

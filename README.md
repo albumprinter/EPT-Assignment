@@ -13,6 +13,7 @@ This is a monorepo using [NPM workspaces](https://docs.npmjs.com/cli/v7/using-np
 - [React](./docs/REACT.md)
 - [Backend](./packages/backend/README.md)
 - [Frontend](./packages/frontend/README.md)
+- [Deployment](./docs/DEPLOYMENT.md)
 
 ## Requirements
 

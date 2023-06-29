@@ -1,0 +1,17 @@
+service: ept-serverless-rest-app
+
+frameworkVersion: '>=2.24.0'
+
+provider:
+  name: aws
+
+plugins:
+  - serverless-lift
+
+constructs:
+  landing:
+    type: single-page-app
+    path: dist
+
+  avatars:
+    type: storage
