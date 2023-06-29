@@ -9,6 +9,7 @@ function App() {
   const [url, setUrl] = useState(defaultUrl);
   const {data: photos, error, isLoading} = useSWR(url, fetcher);
   const [isSortedByOrderCount, setSortOrderCount] = useState(false);
+  const [isFilteredByTextureGlossy, setFilterByTextureGlossy] = useState(false);
 
   if (isLoading) return <h1>Loading...</h1>;
 
@@ -17,6 +18,13 @@ function App() {
   const handleSortGallery: FormEventHandler<HTMLFormElement> = event => {
     setUrl(`${process.env.REACT_APP_PROXY}/photos?sortBy=orderCount`);
     setSortOrderCount(true);
+
+    event.preventDefault();
+  };
+
+  const handleFilterByTexture: FormEventHandler<HTMLFormElement> = event => {
+    setUrl(`${process.env.REACT_APP_PROXY}/photos?texture=glossy`);
+    setFilterByTextureGlossy(true);
 
     event.preventDefault();
   };
@@ -36,6 +44,16 @@ function App() {
                   type="submit"
                   name="sortByOrderCount"
                   value="Sort by order count"
+                />
+              </label>
+            </form>
+            <form onSubmit={handleFilterByTexture}>
+              <label htmlFor="filterByTextureGlossy">
+                <input
+                  disabled={isFilteredByTextureGlossy}
+                  type="submit"
+                  name="filterByTextureGlossy"
+                  value="Filter by glossy"
                 />
               </label>
             </form>
