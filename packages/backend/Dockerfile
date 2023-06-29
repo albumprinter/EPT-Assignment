@@ -12,4 +12,6 @@ RUN npm install --legacy-peer-deps
 
 COPY . /usr/app
 
+EXPOSE 9000
+
 CMD ["npm", "run", "start"]

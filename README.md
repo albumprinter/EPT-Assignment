@@ -19,6 +19,7 @@ This is a monorepo using [NPM workspaces](https://docs.npmjs.com/cli/v7/using-np
 
 - [Node](https://nodejs.org/en/download) [v18.16.0](https://nodejs.org/dist/latest-v18.x/docs/api/)
 - [npm v9](https://docs.npmjs.com/cli/v9/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ## Getting started
 

@@ -19,7 +19,7 @@ custom:
     httpPort: 9000
     noPrependStageInUrl: true
     reloadHandler: true
-    useDocker: true
+    host: 0.0.0.0
 
 provider:
   name: aws
