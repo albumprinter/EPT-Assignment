@@ -43,18 +43,24 @@ function App() {
       <main>
         <ul className="cf ph2-ns list-none">
           <li className="fl w-100 pa2">
-            <FormAction
-              id="sortByOrderCount"
-              text="Sort by order count"
-              onSubmit={handleSortGallery}
-              disabled={isSortedByOrderCount}
-            />
-            <FormAction
-              id="filterByTextureGlossy"
-              text="Filter by glossy"
-              onSubmit={handleFilterByTexture}
-              disabled={isFilteredByTextureGlossy}
-            />
+            <div className="cf">
+              <div className="fl w-50">
+                <FormAction
+                  id="sortByOrderCount"
+                  text="Sort by order count"
+                  onSubmit={handleSortGallery}
+                  disabled={isSortedByOrderCount}
+                />
+              </div>
+              <div className="fl w-50">
+                <FormAction
+                  id="filterByTextureGlossy"
+                  text="Filter by glossy"
+                  onSubmit={handleFilterByTexture}
+                  disabled={isFilteredByTextureGlossy}
+                />
+              </div>
+            </div>
           </li>
           {photos?.map(
             ({id, category, orderCount, extra = {}}: PhotoEntity) => {
