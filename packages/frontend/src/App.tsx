@@ -18,6 +18,7 @@ function App() {
   const handleSortGallery: FormEventHandler<HTMLFormElement> = event => {
     setUrl(`${process.env.REACT_APP_PROXY}/photos?sortBy=orderCount`);
     setSortOrderCount(true);
+    setFilterByTextureGlossy(false);
 
     event.preventDefault();
   };
@@ -25,6 +26,7 @@ function App() {
   const handleFilterByTexture: FormEventHandler<HTMLFormElement> = event => {
     setUrl(`${process.env.REACT_APP_PROXY}/photos?texture=glossy`);
     setFilterByTextureGlossy(true);
+    setSortOrderCount(false);
 
     event.preventDefault();
   };

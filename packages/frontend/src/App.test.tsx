@@ -48,3 +48,32 @@ then the filter by glossy texture button is disabled`, async () => {
     ).toBeDisabled()
   );
 });
+
+test(`when the App renders
+and the filter by glossy texture button is clicked
+and then the sort by Order count button is clicked
+then the sort by Order count button is NOT disabled
+then the sort by glossy texture button is disabled`, async () => {
+  render(<App />);
+
+  userEvent.click(screen.getByRole('button', {name: /Filter by glossy/i}));
+
+  await waitFor(() =>
+    expect(
+      screen.getByRole('button', {name: /Filter by glossy/i})
+    ).toBeDisabled()
+  );
+
+  userEvent.click(screen.getByRole('button', {name: /Sort by order count/i}));
+
+  await waitFor(() =>
+    expect(
+      screen.getByRole('button', {name: /Sort by order count/i})
+    ).toBeDisabled()
+  );
+  await waitFor(() =>
+    expect(
+      screen.getByRole('button', {name: /Filter by glossy/i})
+    ).not.toBeDisabled()
+  );
+});
