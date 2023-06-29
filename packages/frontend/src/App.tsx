@@ -1,6 +1,5 @@
 import React, {FormEventHandler, useState} from 'react';
 import useSWR from 'swr';
-import './App.css';
 import {PhotoEntity} from './Photo';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
@@ -23,33 +22,43 @@ function App() {
   };
 
   return (
-    <div>
+    <div className=' className="mw9 center ph3-ns"'>
       <header>
-        <h1>Photo Gallery</h1>
+        <h1 className="f1 lh-title">Photo Gallery</h1>
       </header>
       <main>
-        <div className="controls wide">
-          <form onSubmit={handleSortGallery}>
-            <label htmlFor="sortByOrderCount">
-              <input
-                disabled={isSortedByOrderCount}
-                type="submit"
-                name="sortByOrderCount"
-                value="Sort by order count"
-              />
-            </label>
-          </form>
-        </div>
-
-        <ul className="grid list-none wide">
-          {photos?.map((photo: PhotoEntity) => (
-            <li key={photo.id}>
-              <img
-                src={`${process.env.REACT_APP_PUBLIC_URL}/images/${photo.id}.jpg`}
-                alt={photo.category}
-              />
-            </li>
-          ))}
+        <ul className="cf ph2-ns list-none">
+          <li className="fl w-100 pa2">
+            <form onSubmit={handleSortGallery}>
+              <label htmlFor="sortByOrderCount">
+                <input
+                  disabled={isSortedByOrderCount}
+                  type="submit"
+                  name="sortByOrderCount"
+                  value="Sort by order count"
+                />
+              </label>
+            </form>
+          </li>
+          {photos?.map(
+            ({id, category, orderCount, extra = {}}: PhotoEntity) => {
+              const {texture = '_'} = extra;
+              return (
+                <li key={id} className="fl w-100 w-50-m  w-25-ns pa2-ns">
+                  <div className="aspect-ratio aspect-ratio--1x1">
+                    <img
+                      src={`${process.env.REACT_APP_PUBLIC_URL}/images/${id}.jpg`}
+                      alt={category}
+                    />
+                  </div>
+                  <p className="ph2 ph0-ns pb3 db">
+                    id: {id}, orderCount: {orderCount}, category: {category},
+                    texture: {texture}
+                  </p>
+                </li>
+              );
+            }
+          )}
         </ul>
       </main>
     </div>
