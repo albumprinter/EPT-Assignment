@@ -35,6 +35,17 @@ function App() {
     event.preventDefault();
   };
 
+  const rotationClass = (rotation: number): string => {
+    switch (rotation) {
+      case 90:
+        return `rotate-90`;
+      case 180:
+        return `rotate-180`;
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className=' className="mw9 center ph3-ns"'>
       <header>
@@ -64,18 +75,19 @@ function App() {
           </li>
           {photos?.map(
             ({id, category, orderCount, extra = {}}: PhotoEntity) => {
-              const {texture = '_'} = extra;
+              const {texture = '_', rotate = 0} = extra;
               return (
                 <li key={id} className="fl w-100 w-50-m  w-25-ns pa2-ns">
-                  <div className="aspect-ratio aspect-ratio--1x1">
+                  <div className="aspect-ratio aspect-ratio--1x1 overflow-hidden">
                     <img
                       src={`${process.env.REACT_APP_PUBLIC_URL}/images/${id}.jpg`}
                       alt={category}
+                      className={rotationClass(rotate)}
                     />
                   </div>
                   <p className="ph2 ph0-ns pb3 db">
                     id: {id}, orderCount: {orderCount}, category: {category},
-                    texture: {texture}
+                    texture: {texture}, rotate: {rotate}
                   </p>
                 </li>
               );
